@@ -678,7 +678,78 @@
             android:layout_height="1px"
             android:background="@color/white_greyish" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="বিজ্ঞান :"
+                android:textColor="@color/white_greyish"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/science_Srijonshil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/science_bohu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/science_prac"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/white_greyish" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -825,8 +896,6 @@
             android:layout_height="1px"
             android:background="@color/white_greyish" />
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -900,8 +969,6 @@
             android:layout_height="1px"
             android:background="@color/white_greyish" />
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -909,7 +976,6 @@
             android:weightSum="5">
 
             <TextView
-                android:id="@+id/agriculture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -983,88 +1049,13 @@
             android:weightSum="5">
 
             <TextView
-                android:id="@+id/science"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="বিজ্ঞান :"
-                android:textColor="@color/white_greyish"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/science_Srijonshil"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:hint="00"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textColorHint="@color/iron"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/science_bohu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:hint="00"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textColorHint="@color/iron"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/science_prac"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:hint="00"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textColorHint="@color/iron"
-                android:textSize="15sp" />
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/white_greyish" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <TextView
-                android:id="@+id/physical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="শারীরিক শিক্ষা ও স্বাস্থ্য+চারু ও কারুকলা :"
+                android:text="শারীরিক শিক্ষা :"
                 android:textColor="@color/white_greyish"
                 android:textSize="15sp" />
 
@@ -1131,7 +1122,6 @@
             android:weightSum="5">
 
             <TextView
-                android:id="@+id/workable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -1198,73 +1188,73 @@
             android:layout_height="1px"
             android:background="@color/white_greyish" />
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="5">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
-<!--            <TextView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_weight="2"-->
-<!--                android:gravity="center"-->
-<!--                android:text="চারু ও কারুকলা  :"-->
-<!--                android:textColor="@color/white_greyish"-->
-<!--                android:textSize="15sp" />-->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="চারু ও কারুকলা  :"
+                android:textColor="@color/white_greyish"
+                android:textSize="15sp" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/caru_Srijonshil"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="0dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:gravity="center"-->
-<!--                android:hint="00"-->
-<!--                android:inputType="number"-->
-<!--                android:maxLines="1"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textColorHint="@color/iron"-->
-<!--                android:textSize="15sp" />-->
+            <EditText
+                android:id="@+id/caru_Srijonshil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/caru_bohu"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="0dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:gravity="center"-->
-<!--                android:hint="00"-->
-<!--                android:inputType="number"-->
-<!--                android:maxLines="1"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textColorHint="@color/iron"-->
-<!--                android:textSize="15sp" />-->
+            <EditText
+                android:id="@+id/caru_bohu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/caru_prac"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="0dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:gravity="center"-->
-<!--                android:hint="00"-->
-<!--                android:inputType="number"-->
-<!--                android:maxLines="1"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textColorHint="@color/iron"-->
-<!--                android:textSize="15sp" />-->
+            <EditText
+                android:id="@+id/caru_prac"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/iron"
+                android:textSize="15sp" />
 
 
-<!--        </LinearLayout>-->
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

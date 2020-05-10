@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -33,11 +34,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
+
+import static android.Manifest.permission.INTERNET;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private String userName="";
     private AppPreferences appPreferences = null;
     private Button demoButton;
+    public static final int RequestPermissionCode = 7;
 
     private void launchHomeScreen() {
 
@@ -70,14 +77,19 @@ public class MainActivity extends AppCompatActivity {
         demoButton=findViewById(R.id.button_demo);
 
         appPreferences = new AppPreferences(this);
+        if (!appPreferences.getBoolean(AppPreferences.PERMISSIONS)) {
+            RequestMultiplePermission();
+        }
+
         if (appPreferences.getString(AppPreferences.USER_ID) != null) {
             launchHomeScreen();
             finish();
         }else {
-            String imeiId = getUniqueIMEIId(this);
+          //  String imeiId = getUniqueIMEIId(this);
+           // Toast.makeText(this, imeiId, Toast.LENGTH_SHORT).show();
 
             // deviceId();
-            getMovieData(imeiId);
+          //  getMovieData(imeiId);
         }
 
 
@@ -88,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
         demoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File mydir=new File(Environment.getExternalStorageDirectory(),"ResultFile");
+
+                if(!mydir.exists()){
+                    mydir.mkdir();
+                }else {
+                    Log.d("error", "dir. already exists");
+                }
                 startActivity(new Intent(MainActivity.this,ClassSelectorActivity.class));
             }
         });
@@ -202,6 +221,22 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+
+    }
+
+    //Permission function starts from here
+    private void RequestMultiplePermission() {
+
+        // Creating String Array with Permissions.
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                {
+                        //  ACCESS_FINE_LOCATION,
+                        WRITE_EXTERNAL_STORAGE,
+                        //   WRITE_INTERNAL_STORAGE,
+                       // READ_PHONE_STATE,
+                        INTERNET
+                        // READ_EXTERNAL_STORAGE
+                }, RequestPermissionCode);
 
     }
 }

@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class DataEntryActivity extends AppCompatActivity {
     private Button pdfBtn;
@@ -24,8 +27,11 @@ public class DataEntryActivity extends AppCompatActivity {
     private EditText agri_Srijonshil, agri_bohu, agri_prac;
     private EditText physical_Srijonshil, physical_bohu, physical_prac;
     private EditText life_Srijonshil, life_bohu, life_prac;
-    private EditText caru_Srijonshil, caru_bohu, caru_prac;
+//    private EditText caru_Srijonshil, caru_bohu, caru_prac;
     private boolean checker = true;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private String group,student_class_name;
+    private TextView agriculture,science,physical,workable;
 
 
     @Override
@@ -76,10 +82,25 @@ public class DataEntryActivity extends AppCompatActivity {
         life_Srijonshil = findViewById(R.id.life_Srijonshil);
         life_bohu = findViewById(R.id.life_bohu);
         life_prac = findViewById(R.id.life_prac);
-        caru_Srijonshil = findViewById(R.id.caru_Srijonshil);
-        caru_bohu = findViewById(R.id.caru_bohu);
-        caru_prac = findViewById(R.id.caru_prac);
+//        caru_Srijonshil = findViewById(R.id.caru_Srijonshil);
+//        caru_bohu = findViewById(R.id.caru_bohu);
+//        caru_prac = findViewById(R.id.caru_prac);
         pdfBtn = findViewById(R.id.pdfBtn);
+        agriculture = findViewById(R.id.agriculture);
+        science = findViewById(R.id.science);
+        physical = findViewById(R.id.physical);
+        workable = findViewById(R.id.workable);
+
+        className.setText(getIntent().getStringExtra("className"));
+        group= getIntent().getStringExtra("group");
+        student_class_name= getIntent().getStringExtra("className");
+
+        if(student_class_name.contains("নবম")|| student_class_name.contains("দশম")){
+            agriculture.setText("উচ্চতর গনিত / কৃষি শিক্ষা");
+            science.setText("রসায়ন / ফিন্যান্স ও ব্যাংকিং / ভূগোল ও পরিবেশ");
+            physical.setText("পদার্থ / হিসাব বিজ্ঞান / অর্থনীতি");
+            workable.setText("জীব বিজ্ঞান / ব্যবসায় উদ্যোগ / ইতিহাস");
+        }
 
         pdfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,14 +130,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     motherName.setError(null);
                     checker = true;
                 }
-                String stu_class = className.getText().toString();
-                if (stu_class.isEmpty()) {
-                    className.setError("fill up");
-                    checker = false;
-                } else {
-                    className.setError(null);
-                    checker = true;
-                }
+
                 String stu_batch = batch.getText().toString();
                 if (stu_batch.isEmpty()) {
                     batch.setError("fill up");
@@ -183,6 +197,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 int bangla_all_total = 0;
                 int bangla1st_total = 0;
                 int bangla12nd_total = 0;
+                double bangla_grade=0.0;
 
                 if (bangla1st_Srijonshil.isEmpty() || bangla1st_bohu.isEmpty() || bangla2nd_Srijonshil.isEmpty() || bangla2nd_bohu.isEmpty()) {
 
@@ -201,6 +216,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     bangla_paper_total = String.valueOf(bangla_all_total);
 
                     bangla_gradePointValue = gradePoint(bangla_all_total / 2);
+                    bangla_grade=gradePointFloat(bangla_all_total / 2);
                     bangla_letterPointValue = letterPoint(bangla_all_total / 2);
                 }
 
@@ -215,14 +231,14 @@ public class DataEntryActivity extends AppCompatActivity {
                     checker = true;
                 }
 
-                String english1st_bohu = english_bohu.getText().toString();
-                if (english1st_bohu.isEmpty()) {
-                    english_bohu.setError("fill up");
-                    checker = false;
-                } else {
-                    english_bohu.setError(null);
-                    checker = true;
-                }
+//                String english1st_bohu = english_bohu.getText().toString();
+//                if (english1st_bohu.isEmpty()) {
+//                    english_bohu.setError("fill up");
+//                    checker = false;
+//                } else {
+//                    english_bohu.setError(null);
+//                    checker = true;
+//                }
 
                 String english2nd_Srijonshil = english2_Srijonshil.getText().toString();
                 if (english2nd_Srijonshil.isEmpty()) {
@@ -233,38 +249,40 @@ public class DataEntryActivity extends AppCompatActivity {
                     checker = true;
                 }
 
-                String english2nd_bohu = english2_bohu.getText().toString();
-                if (english2nd_bohu.isEmpty()) {
-                    english2_bohu.setError("fill up");
-                    checker = false;
-                } else {
-                    english2_bohu.setError(null);
-                    checker = true;
-                }
+//                String english2nd_bohu = english2_bohu.getText().toString();
+//                if (english2nd_bohu.isEmpty()) {
+//                    english2_bohu.setError("fill up");
+//                    checker = false;
+//                } else {
+//                    english2_bohu.setError(null);
+//                    checker = true;
+//                }
 
                 String english1st_paper_total = "", english2nd_paper_total = "", english_srijon_total = "", english_bohu_total = "", english_paper_total = "", english_gradePointValue = "", english_letterPointValue = "";
                 int english_all_total = 0;
                 int english1st_total = 0;
                 int english2nd_total = 0;
+                double english_grade=0.0;
 
-                if (english1st_Srijonshil.isEmpty() || english1st_bohu.isEmpty() || english2nd_Srijonshil.isEmpty() || english2nd_bohu.isEmpty()) {
+                if (english1st_Srijonshil.isEmpty() || english2nd_Srijonshil.isEmpty()) {
                     //  String english1st_practical= english_prac.getText().toString();
 
                 } else {
-                    english1st_total = Integer.parseInt(english1st_Srijonshil) + Integer.parseInt(english1st_bohu);
+                    english1st_total = Integer.parseInt(english1st_Srijonshil);
                     english1st_paper_total = String.valueOf(english1st_total);
 
 
                     //  String english2nd_practical= english2_prac.getText().toString();
-                    english2nd_total = Integer.parseInt(english2nd_Srijonshil) + Integer.parseInt(english2nd_bohu);
+                    english2nd_total = Integer.parseInt(english2nd_Srijonshil);
                     english2nd_paper_total = String.valueOf(english2nd_total);
 
                     english_srijon_total = String.valueOf(Integer.parseInt(english1st_Srijonshil) + Integer.parseInt(english2nd_Srijonshil));
-                    english_bohu_total = String.valueOf(Integer.parseInt(english1st_bohu) + Integer.parseInt(english2nd_bohu));
+                //    english_bohu_total = String.valueOf(Integer.parseInt(english1st_bohu) + Integer.parseInt(english2nd_bohu));
                     english_all_total = english1st_total + english2nd_total;
                     english_paper_total = String.valueOf(english_all_total);
 
                     english_gradePointValue = gradePoint(english_all_total / 2);
+                    english_grade = gradePointFloat(english_all_total / 2);
                     english_letterPointValue = letterPoint(english_all_total / 2);
                 }
 
@@ -288,6 +306,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 }
                 String mathematics_paper_total = "", mathematics_gradePointValue = "", mathematics_letterPointValue = "";
                 int mathematics_total = 0;
+                double math_grade=0.0;
                 if (mathematics_Srijonshil.isEmpty() || mathematics_bohu.isEmpty()) {
 
 
@@ -296,6 +315,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     mathematics_paper_total = String.valueOf(mathematics_total);
 
                     mathematics_gradePointValue = gradePoint(mathematics_total);
+                    math_grade = gradePointFloat(mathematics_total);
                     mathematics_letterPointValue = letterPoint(mathematics_total);
                 }
 
@@ -318,15 +338,30 @@ public class DataEntryActivity extends AppCompatActivity {
                     science_bohu.setError(null);
                     checker = true;
                 }
+
+                String science_practical = science_prac.getText().toString();
+                if (science_practical.isEmpty()) {
+                    if(student_class_name.contains("নবম")|| student_class_name.contains("দশম")){
+                        science_practical="0";
+                    }
+                    science_prac.setError("fill up");
+                    checker = true;
+                } else {
+                    science_prac.setError(null);
+                    checker = true;
+                }
+
                 String science_paper_total = "", science_gradePointValue = "", science_letterPointValue = "";
                 int science_total = 0;
-                if (science_Srijon.isEmpty() || science_bohunirbaconi.isEmpty()) {
+                double science_grade = 0.0;
+                if (science_Srijon.isEmpty() || science_bohunirbaconi.isEmpty()|| science_practical.isEmpty()) {
 
                 } else {
-                    science_total = Integer.parseInt(science_Srijon) + Integer.parseInt(science_bohunirbaconi);
+                    science_total = Integer.parseInt(science_Srijon) + Integer.parseInt(science_bohunirbaconi)+Integer.parseInt(science_practical);
                     science_paper_total = String.valueOf(science_total);
 
                     science_gradePointValue = gradePoint(science_total);
+                    science_grade = gradePointFloat(science_total);
                     science_letterPointValue = letterPoint(science_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -349,6 +384,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 }
                 String religion_paper_total = "", religion_gradePointValue = "", religion_letterPointValue = "";
                 int religion_total = 0;
+                double religion_grade = 0.0;
                 if (religion_Srijon.isEmpty() || religion_bohunirbaconi.isEmpty()) {
 
                 } else {
@@ -356,6 +392,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     religion_paper_total = String.valueOf(religion_total);
 
                     religion_gradePointValue = gradePoint(religion_total);
+                    religion_grade = gradePointFloat(religion_total);
                     religion_letterPointValue = letterPoint(religion_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -378,6 +415,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 }
                 String ban_world_paper_total = "", ban_world_gradePointValue = "", ban_world_letterPointValue = "";
                 int ban_world_total = 0;
+                double ban_world_grade = 0.0;
                 if (ban_world_Srijon.isEmpty() || ban_world_bohunirbaconi.isEmpty() ) {
 
                 } else {
@@ -385,6 +423,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     ban_world_paper_total = String.valueOf(ban_world_total);
 
                     ban_world_gradePointValue = gradePoint(ban_world_total);
+                    ban_world_grade = gradePointFloat(ban_world_total);
                     ban_world_letterPointValue = letterPoint(ban_world_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,14 +447,16 @@ public class DataEntryActivity extends AppCompatActivity {
 
                 String info_tech_paper_total = "", info_tech_gradePointValue = "", info_tech_letterPointValue = "";
                 int info_tech_total = 0;
+                double info_tech_grade = 0.0;
                 if (info_tech_Srijon.isEmpty() || info_tech_bohunirbaconi.isEmpty() ) {
 
                 } else {
                     info_tech_total = Integer.parseInt(info_tech_Srijon) + Integer.parseInt(info_tech_bohunirbaconi);
                     info_tech_paper_total = String.valueOf(info_tech_total);
 
-                    info_tech_gradePointValue = gradePoint(info_tech_total);
-                    info_tech_letterPointValue = letterPoint(info_tech_total);
+                    info_tech_gradePointValue = gradePoint(2*info_tech_total);
+                    info_tech_grade = gradePointFloat(2*info_tech_total);
+                    info_tech_letterPointValue = letterPoint(2*info_tech_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -436,15 +477,29 @@ public class DataEntryActivity extends AppCompatActivity {
                     checker = true;
                 }
 
+                String agri_practical = agri_prac.getText().toString();
+                if (agri_practical.isEmpty()) {
+                    if(student_class_name.contains("নবম")|| student_class_name.contains("দশম")){
+                        agri_practical="0";
+                    }
+                    agri_prac.setError("fill up");
+                    checker = true;
+                } else {
+                    agri_prac.setError(null);
+                    checker = true;
+                }
+
                 String agri_paper_total = "", agri_gradePointValue = "", agri_letterPointValue = "";
                 int agri_total = 0;
-                if (agri_Srijon.isEmpty() || agri_bohunirbaconi.isEmpty() ) {
+                double agri_grade = 0.0;
+                if (agri_Srijon.isEmpty() || agri_bohunirbaconi.isEmpty() || agri_practical.isEmpty()) {
 
                 } else {
-                    agri_total = Integer.parseInt(agri_Srijon) + Integer.parseInt(agri_bohunirbaconi);
+                    agri_total = Integer.parseInt(agri_Srijon) + Integer.parseInt(agri_bohunirbaconi)+ Integer.parseInt(agri_practical);
                     agri_paper_total = String.valueOf(agri_total);
 
                     agri_gradePointValue = gradePoint(agri_total);
+                    agri_grade = gradePointFloat(agri_total);
                     agri_letterPointValue = letterPoint(agri_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -466,18 +521,44 @@ public class DataEntryActivity extends AppCompatActivity {
                     checker = true;
                 }
 
+                String physical_practical= physical_prac.getText().toString();
+                if (physical_practical.isEmpty()) {
+                    if(student_class_name.contains("নবম")|| student_class_name.contains("দশম")){
+                        physical_practical="0";
+                    }
+                    physical_prac.setError("fill up");
+                    checker = true;
+                } else {
+                    physical_prac.setError(null);
+                    checker = true;
+                }
+
                 String physical_paper_total = "", physical_gradePointValue = "", physical_letterPointValue = "";
                 int physical_total = 0;
-                if (physical_Srijon.isEmpty() || physical_bohunirbaconi.isEmpty() ) {
+                double physical_grade = 0.0;
+                if (physical_Srijon.isEmpty() || physical_bohunirbaconi.isEmpty() || physical_practical.isEmpty()) {
 
                 } else {
-                    physical_total = Integer.parseInt(physical_Srijon) + Integer.parseInt(physical_bohunirbaconi);
+                    physical_total = Integer.parseInt(physical_Srijon) + Integer.parseInt(physical_bohunirbaconi)+ Integer.parseInt(physical_practical);
                     physical_paper_total = String.valueOf(physical_total);
 
                     physical_gradePointValue = gradePoint(physical_total);
+                    physical_grade = gradePointFloat(physical_total);
                     physical_letterPointValue = letterPoint(physical_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                String life_practical = life_prac.getText().toString();
+                if (life_practical.isEmpty()) {
+                    if(student_class_name.contains("নবম")|| student_class_name.contains("দশম")){
+                        life_practical="0";
+                    }
+                    life_prac.setError("fill up");
+                    checker = true;
+                } else {
+                    life_prac.setError(null);
+                    checker = true;
+                }
 
                 String life_Srijon = life_Srijonshil.getText().toString();
                 if (life_Srijon.isEmpty()) {
@@ -496,58 +577,65 @@ public class DataEntryActivity extends AppCompatActivity {
                     checker = true;
                 }
 
+
+
+
                 String life_paper_total = "", life_gradePointValue = "", life_letterPointValue = "";
                 int life_total = 0;
-                if (life_Srijon.isEmpty() || life_bohunirbaconi.isEmpty() ) {
+                double life_grade = 0.0;
+                if (life_Srijon.isEmpty() || life_bohunirbaconi.isEmpty() || life_practical.isEmpty()) {
 
                 } else {
-                    life_total = Integer.parseInt(life_Srijon) + Integer.parseInt(life_bohunirbaconi);
+                    life_total = Integer.parseInt(life_Srijon) + Integer.parseInt(life_bohunirbaconi)+ Integer.parseInt(life_practical);
                     life_paper_total = String.valueOf(life_total);
 
                     life_gradePointValue = gradePoint(life_total);
+                    life_grade = gradePointFloat(life_total);
                     life_letterPointValue = letterPoint(life_total);
                 }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                String caru_Srijon = caru_Srijonshil.getText().toString();
-                if (caru_Srijon.isEmpty()) {
-                    caru_Srijonshil.setError("fill up");
-                    checker = false;
-                } else {
-                    caru_Srijonshil.setError(null);
-                    checker = true;
-                }
-                String caru_bohunirbaconi = caru_bohu.getText().toString();
-                if (caru_bohunirbaconi.isEmpty()) {
-                    caru_bohu.setError("fill up");
-                    checker = false;
-                } else {
-                    caru_bohu.setError(null);
-                    checker = true;
-                }
-
-                String caru_paper_total = "", caru_gradePointValue = "", caru_letterPointValue = "";
-                int caru_total = 0;
-                if (caru_Srijon.isEmpty() || caru_bohunirbaconi.isEmpty() ) {
-
-
-                } else {
-                    caru_total = Integer.parseInt(caru_Srijon) + Integer.parseInt(caru_bohunirbaconi);
-                    caru_paper_total = String.valueOf(caru_total);
-
-                    caru_gradePointValue = gradePoint(caru_total);
-                    caru_letterPointValue = letterPoint(caru_total);
-                }
+//                String caru_Srijon = caru_Srijonshil.getText().toString();
+//                if (caru_Srijon.isEmpty()) {
+//                    caru_Srijonshil.setError("fill up");
+//                    checker = false;
+//                } else {
+//                    caru_Srijonshil.setError(null);
+//                    checker = true;
+//                }
+//                String caru_bohunirbaconi = caru_bohu.getText().toString();
+//                if (caru_bohunirbaconi.isEmpty()) {
+//                    caru_bohu.setError("fill up");
+//                    checker = false;
+//                } else {
+//                    caru_bohu.setError(null);
+//                    checker = true;
+//                }
+//
+//                String caru_paper_total = "", caru_gradePointValue = "", caru_letterPointValue = "";
+//                int caru_total = 0;
+//                if (caru_Srijon.isEmpty() || caru_bohunirbaconi.isEmpty() ) {
+//
+//
+//                } else {
+//                    caru_total = Integer.parseInt(caru_Srijon) + Integer.parseInt(caru_bohunirbaconi);
+//                    caru_paper_total = String.valueOf(caru_total);
+//
+//                    caru_gradePointValue = gradePoint(caru_total);
+//                    caru_letterPointValue = letterPoint(caru_total);
+//                }
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                if(checker) {
 
                    int total_marks = bangla_all_total + english_all_total + mathematics_total + science_total + religion_total + ban_world_total + info_tech_total + agri_total +
-                           physical_total + life_total + caru_total;
+                           physical_total + life_total;
                    String stu_total_marks = String.valueOf(total_marks);
 
-                   String stu_total_gradePointValue = gradePoint(total_marks / 11);
-                   String stu_total_letterPointValue = letterPoint(total_marks / 11);
+
+                   double stu_total_gradePoint = bangla_grade+english_grade+math_grade+life_grade+physical_grade+agri_grade+info_tech_grade+ban_world_grade+religion_grade+science_grade;
+                   String stu_total_gradePointValue = String.valueOf(df2.format(stu_total_gradePoint / 9));
+                   String stu_total_letterPointValue = letterPoint(total_marks / 10);
 
                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -555,7 +643,8 @@ public class DataEntryActivity extends AppCompatActivity {
                    i.putExtra("student_name", stu_name);
                    i.putExtra("student_father_name", stu_father_name);
                    i.putExtra("student_mother_name", stu_mother_name);
-                   i.putExtra("student_class", stu_class);
+                   i.putExtra("student_class", className.getText().toString());
+                   i.putExtra("student_group", group);
                    i.putExtra("student_session", stu_session);
                    i.putExtra("student_batch", stu_batch);
                    i.putExtra("student_roll", stu_roll);
@@ -573,13 +662,13 @@ public class DataEntryActivity extends AppCompatActivity {
                    i.putExtra("bangla_letterPointValue", bangla_letterPointValue);
 
                    i.putExtra("english1st_Srijonshil", english1st_Srijonshil);
-                   i.putExtra("english1st_bohu", english1st_bohu);
+              //     i.putExtra("english1st_bohu", english1st_bohu);
                    i.putExtra("english1st_paper_total", english1st_paper_total);
                    i.putExtra("english2nd_Srijonshil", english2nd_Srijonshil);
-                   i.putExtra("english2nd_bohu", english2nd_bohu);
+              //     i.putExtra("english2nd_bohu", english2nd_bohu);
                    i.putExtra("english2nd_paper_total", english2nd_paper_total);
                    i.putExtra("english_srijon_total", english_srijon_total);
-                   i.putExtra("english_bohu_total", english_bohu_total);
+              //     i.putExtra("english_bohu_total", english_bohu_total);
                    i.putExtra("english_paper_total", english_paper_total);
                    i.putExtra("english_gradePointValue", english_gradePointValue);
                    i.putExtra("english_letterPointValue", english_letterPointValue);
@@ -592,6 +681,7 @@ public class DataEntryActivity extends AppCompatActivity {
 
                    i.putExtra("science_Srijon", science_Srijon);
                    i.putExtra("science_bohunirbaconi", science_bohunirbaconi);
+                   i.putExtra("science_practical", science_practical);
                    i.putExtra("science_paper_total", science_paper_total);
                    i.putExtra("science_gradePointValue", science_gradePointValue);
                    i.putExtra("science_letterPointValue", science_letterPointValue);
@@ -616,27 +706,30 @@ public class DataEntryActivity extends AppCompatActivity {
 
                    i.putExtra("agri_Srijon", agri_Srijon);
                    i.putExtra("agri_bohunirbaconi", agri_bohunirbaconi);
+                   i.putExtra("agri_practical", agri_practical);
                    i.putExtra("agri_paper_total", agri_paper_total);
                    i.putExtra("agri_gradePointValue", agri_gradePointValue);
                    i.putExtra("agri_letterPointValue", agri_letterPointValue);
 
                    i.putExtra("physical_Srijon", physical_Srijon);
                    i.putExtra("physical_bohunirbaconi", physical_bohunirbaconi);
+                   i.putExtra("physical_practical", physical_practical);
                    i.putExtra("physical_paper_total", physical_paper_total);
                    i.putExtra("physical_gradePointValue", physical_gradePointValue);
                    i.putExtra("physical_letterPointValue", physical_letterPointValue);
 
                    i.putExtra("life_Srijon", life_Srijon);
                    i.putExtra("life_bohunirbaconi", life_bohunirbaconi);
+                   i.putExtra("life_practical", life_practical);
                    i.putExtra("life_paper_total", life_paper_total);
                    i.putExtra("life_gradePointValue", life_gradePointValue);
                    i.putExtra("life_letterPointValue", life_letterPointValue);
 
-                   i.putExtra("caru_Srijon", caru_Srijon);
-                   i.putExtra("caru_bohunirbaconi", caru_bohunirbaconi);
-                   i.putExtra("caru_paper_total", caru_paper_total);
-                   i.putExtra("caru_gradePointValue", caru_gradePointValue);
-                   i.putExtra("caru_letterPointValue", caru_letterPointValue);
+//                   i.putExtra("caru_Srijon", caru_Srijon);
+//                   i.putExtra("caru_bohunirbaconi", caru_bohunirbaconi);
+//                   i.putExtra("caru_paper_total", caru_paper_total);
+//                   i.putExtra("caru_gradePointValue", caru_gradePointValue);
+//                   i.putExtra("caru_letterPointValue", caru_letterPointValue);
 
                    i.putExtra("stu_total_marks", stu_total_marks);
                    i.putExtra("stu_total_gradePointValue", stu_total_gradePointValue);
@@ -688,6 +781,28 @@ public class DataEntryActivity extends AppCompatActivity {
             grade = "D";
         else
             grade = "F";
+
+        return grade;
+    }
+
+    public double gradePointFloat(double value) {
+
+        double grade =0.0;
+
+        if (value >= 80 && value <= 100)
+            grade = 5.0;
+        else if (value >= 70 && value <= 79)
+            grade = 4.0;
+        else if (value >= 60 && value <= 69)
+            grade = 3.5;
+        else if (value >= 50 && value <= 59)
+            grade = 3.0;
+        else if (value >= 40 && value <= 49)
+            grade = 2.0;
+        else if (value >= 33 && value <= 39)
+            grade = 1.0;
+        else
+            grade = 0.0;
 
         return grade;
     }

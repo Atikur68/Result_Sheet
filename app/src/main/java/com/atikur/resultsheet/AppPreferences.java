@@ -10,6 +10,7 @@ public class AppPreferences {
     public static final String SCHOOL_NAME = "school_name";
     public static final String SCHOOL_ADDRESS = "school_address";
     public static final String EXAM_NAME = "exam_name";
+    public static final String PERMISSIONS = "permission_status";
 
 
 
